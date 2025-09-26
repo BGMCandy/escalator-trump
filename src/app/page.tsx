@@ -74,7 +74,7 @@ export default function SlimeSoccerGame() {
 
     const gameLoop = setInterval(() => {
       setGameState(prevState => {
-        let newState = { ...prevState };
+        const newState = { ...prevState };
         
         // Fixed escalator structure - always present
         const canvas = canvasRef.current;
@@ -85,7 +85,6 @@ export default function SlimeSoccerGame() {
         const escalatorStartY = canvasHeight - 50; // Near bottom
         const escalatorEndX = canvasWidth * 0.8; // 80% from left
         const escalatorEndY = canvasHeight * 0.3; // 30% from top
-        const escalatorWidth = 80;
         const floorY = canvasHeight - 50; // Ground level
         const topFloorY = escalatorEndY; // Second floor level at the top
         
