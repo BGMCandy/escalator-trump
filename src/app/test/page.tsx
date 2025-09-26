@@ -85,7 +85,7 @@ export default function TestPage() {
           <h2 className="text-xl font-semibold mb-2">Console Output</h2>
           <p>Check the browser console (F12) for any error messages.</p>
           <p className="mt-2 text-sm text-gray-600">
-            You should see: "Test page: Client-side rendering started"
+            You should see: &quot;Test page: Client-side rendering started&quot;
           </p>
         </div>
       </div>
