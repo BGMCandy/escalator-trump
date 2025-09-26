@@ -39,6 +39,7 @@ export default function SlimeSoccerGame() {
   const keys = useRef<Set<string>>(new Set());
 
   useEffect(() => {
+    console.log('Client-side rendering started');
     setIsClient(true);
   }, []);
 
@@ -624,10 +625,10 @@ export default function SlimeSoccerGame() {
   };
 
   if (!isClient) {
-    return (
+  return (
       <div className="h-screen w-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
-      </div>
+          </div>
     );
   }
 
