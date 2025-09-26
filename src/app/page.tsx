@@ -22,6 +22,7 @@ interface GameState {
 
 export default function SlimeSoccerGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isClient, setIsClient] = useState(false);
   const [gameState, setGameState] = useState<GameState>({
     gameStarted: false,
     trumpPosition: { x: 50, y: 600 },
@@ -38,17 +39,23 @@ export default function SlimeSoccerGame() {
   const keys = useRef<Set<string>>(new Set());
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       const canvas = canvasRef.current;
-      if (canvas) {
+      if (canvas && typeof window !== 'undefined') {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
   }, []);
 
   useEffect(() => {
@@ -616,6 +623,14 @@ export default function SlimeSoccerGame() {
       });
   };
 
+  if (!isClient) {
+    return (
+      <div className="h-screen w-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen w-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 relative">
       {/* Simple Start Mission button */}
@@ -653,8 +668,8 @@ export default function SlimeSoccerGame() {
       {/* Full screen game canvas */}
       <canvas
         ref={canvasRef}
-        width={window.innerWidth}
-        height={window.innerHeight}
+        width={typeof window !== 'undefined' ? window.innerWidth : 1000}
+        height={typeof window !== 'undefined' ? window.innerHeight : 600}
         className="absolute inset-0"
       />
     </div>
