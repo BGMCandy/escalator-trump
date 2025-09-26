@@ -72,7 +72,7 @@ export default function TestPage() {
 
         <div className="bg-white p-4 rounded-lg shadow mb-6">
           <h2 className="text-xl font-semibold mb-2">Canvas Test</h2>
-          <p className="mb-4">If you see a green square and text below, canvas is working:</p>
+          <p className="mb-4">If you see a grwefwefeen square and text below, canvas is working:</p>
           <canvas
             ref={canvasRef}
             width={windowSize.width || 800}
